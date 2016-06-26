@@ -1,21 +1,111 @@
-// var http = require("https");
+// var https = require("https");
 //
-// var request = http.get("https://teamtreehouse.com/rebeccalin2.json", function(response){
+//   https.get('https://api.instagram.com/v1/users/self/?access_token=3328304.5178046.92ec4e0d6dc749fe9ff72182699b6706',
+//           function(response){
+//             var body = '';
 //
-//   console.log(response.statusCode);
-// });
+//             console.log(response.statusCode);
+//             response.on('data', function(chunk){
+//               body += chunk;
+//
+//             })
+//
+//             response.on('end', function(){
+//               var profile = JSON.parse(body);
+//               response.send(profile);
+//
+//             });
+//
+//           });
+//   https.get('https://api.instagram.com/v1/users/3328304/media/recent/?access_token=3328304.5178046.92ec4e0d6dc749fe9ff72182699b6706',
+//           function(response){
+//             var body = '';
+//
+//             console.log(response.statusCode);
+//             response.on('data', function(chunk){
+//               body += chunk;
+//
+//             })
+//
+//             response.on('end', function(){
+//               var profile = JSON.parse(body);
+//               response.end(profile);
+//
+//             });
+//
+//           });
 
+
+// }).listen(8888,'127.0.0.1');
+//
+// console.log('server running');
+
+//user_id: 3328304
+//client_id: 517804636ecd49c4a0e4284d04705d00
+//client_secret: 97a050b11d664272baee604b9f08565d
 //access token: 3328304.5178046.92ec4e0d6dc749fe9ff72182699b6706
-var ig = require('instagram-node').instagram();
+var http = require("http");
+var https = require("https")
+var ig = require('instagram-node-lib');
+var express = require('express');
+var app = express();
+var server = http.createServer(app);
 
-// Every call to `ig.use()` overrides the `client_id/client_secret`
-// or `access_token` previously entered if they exist.
-ig.use({ access_token: '3328304.5178046.92ec4e0d6dc749fe9ff72182699b6706' });
-ig.use({ client_id: ' 	517804636ecd49c4a0e4284d04705d00',
-         client_secret: '97a050b11d664272baee604b9f08565d' });
+ig.set('client_id', '517804636ecd49c4a0e4284d04705d00');
+ig.set('client_secret', '97a050b11d664272baee604b9f08565d');
+ig.set('access_token', '3328304.5178046.92ec4e0d6dc749fe9ff72182699b6706');
 
-ig.media_popular(function(err,medias,remaining,limit){
+app.get('/',function(request, response){
 
-   console.log('medias',medias);
-   res.send('You made it!!');
+  response.header('application/json');
+  //response.send('home');
+  var user_id;
+  var get_user_id = https.request('https://api.instagram.com/v1/users/self/?access_token=3328304.5178046.92ec4e0d6dc749fe9ff72182699b6706',
+        function(res){
+          var body = '';
+
+          console.log(response.statusCode);
+          res.on('data', function(chunk){
+            body += chunk;
+          })
+
+          res.on('end', function(){
+            var profile = JSON.parse(body);
+            user_id = profile.data.id;
+            //response.send(profile);
+            console.log(user_id);
+          });
+  });
+  get_user_id.end();
+  get_user_id.on('error', function(e) {
+     text = "error at get_user_id";
+  });
+
+  var get_my_post = https.request('https://api.instagram.com/v1/users/self/media/recent/?access_token=3328304.5178046.92ec4e0d6dc749fe9ff72182699b6706',
+        function(res){
+          var body = '';
+
+          console.log(response.statusCode);
+          res.on('data', function(chunk){
+            body += chunk;
+          })
+
+          res.on('end', function(){
+            var photos = JSON.parse(body);
+            response.send(photos);
+          });
+  });
+  get_my_post.end();
+  get_my_post.on('error', function(e) {
+     text = "error at get_my_post";
+  });
+
+
+});
+server.listen(8888,'127.0.0.1',function(err){
+  if(err){
+    console.error(err);
+  } else {
+    console.log('server running');
+  }
 });
