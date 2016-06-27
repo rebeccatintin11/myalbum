@@ -1,45 +1,3 @@
-// var https = require("https");
-//
-//   https.get('https://api.instagram.com/v1/users/self/?access_token=3328304.5178046.92ec4e0d6dc749fe9ff72182699b6706',
-//           function(response){
-//             var body = '';
-//
-//             console.log(response.statusCode);
-//             response.on('data', function(chunk){
-//               body += chunk;
-//
-//             })
-//
-//             response.on('end', function(){
-//               var profile = JSON.parse(body);
-//               response.send(profile);
-//
-//             });
-//
-//           });
-//   https.get('https://api.instagram.com/v1/users/3328304/media/recent/?access_token=3328304.5178046.92ec4e0d6dc749fe9ff72182699b6706',
-//           function(response){
-//             var body = '';
-//
-//             console.log(response.statusCode);
-//             response.on('data', function(chunk){
-//               body += chunk;
-//
-//             })
-//
-//             response.on('end', function(){
-//               var profile = JSON.parse(body);
-//               response.end(profile);
-//
-//             });
-//
-//           });
-
-
-// }).listen(8888,'127.0.0.1');
-//
-// console.log('server running');
-
 //user_id: 3328304
 //client_id: 517804636ecd49c4a0e4284d04705d00
 //client_secret: 97a050b11d664272baee604b9f08565d
@@ -55,8 +13,10 @@ ig.set('client_id', '517804636ecd49c4a0e4284d04705d00');
 ig.set('client_secret', '97a050b11d664272baee604b9f08565d');
 ig.set('access_token', '3328304.5178046.92ec4e0d6dc749fe9ff72182699b6706');
 
-app.get('/',function(request, response){
+app.all('/',function(request, response){
 
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "X-Requested-With");
   response.header('application/json');
   //response.send('home');
   var user_id;
@@ -80,7 +40,7 @@ app.get('/',function(request, response){
   get_user_id.on('error', function(e) {
      text = "error at get_user_id";
   });
-
+  // https://api.instagram.com/v1/users/self/media/liked?access_token=3328304.5178046.92ec4e0d6dc749fe9ff72182699b6706
   var get_my_post = https.request('https://api.instagram.com/v1/users/self/media/recent/?access_token=3328304.5178046.92ec4e0d6dc749fe9ff72182699b6706',
         function(res){
           var body = '';
