@@ -16,6 +16,8 @@ $(function(){
             $('.instagram-photo').html(imgString);
             $('.instagram-photo').slick({
                 arrows: true,
+                nextArrow: '<i class="fa fa-chevron-right"></i>',
+                prevArrow: '<i class="fa fa-chevron-left"></i>',
                 centerMode: true,
                 centerPadding: '60px',
                 slidesToShow: 3,
