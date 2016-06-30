@@ -15,13 +15,15 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.fa-chevron-right {
-  color: red;
+.fa-chevron-right,
+.fa-chevron-left {
+  color: #323232;
+  cursor: pointer;
+
 }
 
 .instagram-photo{
   display: flex;
   align-items: center;
-  width: 90vw;
   height: 90vh;
 }
