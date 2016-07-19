@@ -15,15 +15,46 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.fa-chevron-right,
-.fa-chevron-left {
-  color: #323232;
-  cursor: pointer;
-
+.instagram-photo {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55vh;
+  width: 90vw;
 }
 
-.instagram-photo{
-  display: flex;
-  align-items: center;
-  height: 90vh;
+.slick-dotted.slick-slider {
+  margin: auto;
+}
+
+.slick-prev,
+.slick-next {
+  width: 50px;
+  height: 50px;
+}
+
+.slick-prev {
+  left: -50px;
+}
+
+.slick-next {
+  right: -50px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-family: FontAwesome;
+  font-size: 40px;
+  color: #323232;
+  cursor: pointer;
+}
+
+.slick-prev:before {
+  content: '\f053';
+}
+.slick-next:before {
+  content: '\f054';
 }

@@ -15,32 +15,13 @@ $(function(){
             });
             $('.instagram-photo').html(imgString);
             $('.instagram-photo').slick({
+                dots: true,
                 arrows: true,
-                nextArrow: '<i class="fa fa-chevron-right fa-3x"></i>',
-                prevArrow: '<i class="fa fa-chevron-left fa-3x"></i>',
                 centerMode: true,
                 centerPadding: '60px',
+                infinite: true,
                 slidesToShow: 3,
-                responsive: [
-                {
-                  breakpoint: 768,
-                  settings: {
-                    arrows: true,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 3
-                  }
-                },
-                {
-                  breakpoint: 480,
-                  settings: {
-                    arrows: true,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 1
-                  }
-                }
-                ]
+                slidesToScroll: 3
               });
         },
         error: function (xhr, status, error) {
